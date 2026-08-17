@@ -44,8 +44,8 @@ jobs:
       - name: Build app (ad-hoc signing)
         run: |
           xcodebuild \
-            -project CornellMind.xcodeproj \
-            -scheme CornellMind \
+            -project INTR.xcodeproj \
+            -scheme INTR \
             -configuration Release \
             -derivedDataPath build \
             CODE_SIGN_IDENTITY="-" \
@@ -61,12 +61,12 @@ jobs:
           APP=$(find build/Build/Products/Release -maxdepth 1 -name "*.app" | head -n1)
           echo "Packaging: $APP"
           cd build/Build/Products/Release
-          zip -qry CornellMind-macOS.zip "$(basename "$APP")"
+          zip -qry INTR-macOS.zip "$(basename "$APP")"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: CornellMind-macOS
-          path: build/Build/Products/Release/CornellMind-macOS.zip
+          name: INTR-macOS
+          path: build/Build/Products/Release/INTR-macOS.zip
           if-no-files-found: error
           retention-days: 14

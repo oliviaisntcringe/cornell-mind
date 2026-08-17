@@ -7,73 +7,82 @@ struct NoteEditorView: View {
     @State private var showMindMap = false
     @State private var newTag = ""
 
-    private let columnWidth: CGFloat = 1.0 / 3.0
-
     var body: some View {
-        VStack(spacing: 12) {
-            if note.title.isEmpty {
-                Text("Конспект без названия")
-                    .font(.title2.bold())
-                    .foregroundStyle(.secondary)
-            } else {
-                Text(note.title)
-                    .font(.title2.bold())
+        VStack(spacing: 14) {
+            HStack(spacing: 8) {
+                Rectangle()
+                    .fill(INTR.lime)
+                    .frame(width: 10, height: 38)
+                Text(note.title.isEmpty ? "БЕЗ НАЗВАНИЯ" : note.title.uppercased())
+                    .font(INTR.fontHeader)
+                    .foregroundColor(INTR.text)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
+                Spacer()
             }
 
-            HStack(spacing: 10) {
+            HStack(alignment: .top, spacing: 10) {
                 CornellField(
-                    title: "Ключевые вопросы",
-                    systemImage: "questionmark.circle",
+                    title: "ВОПРОСЫ",
+                    systemImage: "questionmark",
                     text: $note.questions,
-                    placeholder: "Что я запомню из этого конспекта?\n• Вопрос 1\n• Вопрос 2",
-                    heightScale: columnWidth
+                    placeholder: "Что запомню?",
+                    ratio: 1
                 )
                 CornellField(
-                    title: "Заметки",
-                    systemImage: "note.text",
+                    title: "ЗАМЕТКИ",
+                    systemImage: "doc.plaintext",
                     text: $note.notes,
                     placeholder: "Основной конспект…",
-                    heightScale: 1.0
+                    ratio: 3
                 )
             }
 
             CornellField(
-                title: "Резюме",
+                title: "РЕЗЮМЕ",
                 systemImage: "text.alignleft",
                 text: $note.summary,
-                placeholder: "2–3 предложения, резюмирующие суть…",
-                heightScale: 1.0
+                placeholder: "Суть в 2–3 предложениях…",
+                ratio: 1
             )
             .frame(minHeight: 100)
 
-            HStack {
-                Text("Теги:")
-                    .foregroundStyle(.secondary)
+            HStack(spacing: 8) {
+                Text("ТЕГИ:")
+                    .font(.caption2.bold())
+                    .foregroundColor(INTR.concrete)
                 ForEach(Array(note.tags.enumerated()), id: \.offset) { _, tag in
-                    TagChip(tag: tag) {
-                        note.tags.removeAll { $0 == tag }
-                    }
+                    TagChip(tag: tag) { note.tags.removeAll { $0 == tag } }
                 }
-                if !note.tags.isEmpty { Divider().frame(height: 16) }
-                TextField("Добавить тег", text: $newTag)
-                    .textFieldStyle(.roundedBorder)
-                    .frame(width: 140)
+                Spacer()
+                TextField("ДОБАВИТЬ ТЕГ", text: $newTag)
+                    .textFieldStyle(.plain)
+                    .font(.caption.bold())
+                    .frame(width: 150)
                     .onSubmit(addTag)
-                Button { addTag() } label: { Image(systemName: "plus.circle.fill") }
-                    .buttonStyle(.borderless)
-                    .disabled(newTag.trimmingCharacters(in: .whitespaces).isEmpty)
+                Button(action: addTag) {
+                    Image(systemName: "plus")
+                        .font(.caption.bold())
+                        .frame(width: 24, height: 24)
+                        .background(INTR.graphite)
+                        .foregroundColor(INTR.lime)
+                }
+                .buttonStyle(.plain)
+                .disabled(newTag.trimmingCharacters(in: .whitespaces).isEmpty)
             }
-            .padding(.top, 4)
+            .padding(.top, 2)
         }
         .padding(16)
+        .background(INTR.background)
         .navigationTitle(note.title.isEmpty ? "Новый конспект" : note.title)
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
                 Button {
                     showMindMap.toggle()
                 } label: {
-                    Label("Mind Map", systemImage: "point.3.connected.trianglepath.dotted")
+                    Label("MIND MAP", systemImage: "point.3.connected.trianglepath.dotted")
                 }
+                .buttonStyle(.bordered)
                 .popover(isPresented: $showMindMap) {
                     MindMapView(note: note)
                         .frame(minWidth: 640, minHeight: 480)
@@ -94,41 +103,45 @@ struct NoteEditorView: View {
     }
 }
 
+/// Поле Cornell в бруталистском стиле. `ratio` задаёт долю ширины (вопросы : заметки).
 struct CornellField: View {
     let title: String
     let systemImage: String
     @Binding var text: String
     let placeholder: String
-    var heightScale: CGFloat = 1.0
+    var ratio: CGFloat = 1
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Label(title, systemImage: systemImage)
-                .font(.callout.bold())
-                .foregroundStyle(.secondary)
+            HStack(spacing: 6) {
+                Image(systemName: systemImage)
+                    .font(.caption.bold())
+                Text(title)
+                    .font(.caption.bold())
+                Spacer()
+            }
+            .foregroundColor(INTR.graphite)
+
             ZStack(alignment: .topLeading) {
                 if text.isEmpty {
                     TextEditor(text: .constant(placeholder))
-                        .font(.body)
-                        .foregroundStyle(Color.secondary.opacity(0.5))
+                        .font(INTR.fontBody)
+                        .foregroundColor(INTR.concrete.opacity(0.6))
                         .disabled(true)
                 }
                 TextEditor(text: $text)
-                    .font(.body)
+                    .font(INTR.fontBody)
                     .scrollContentBackground(.hidden)
+                    .foregroundColor(INTR.text)
                     .frame(maxHeight: .infinity)
             }
-            .padding(6)
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color(nsColor: .textBackgroundColor))
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .strokeBorder(Color.secondary.opacity(0.3))
-            )
+            .padding(8)
+            .background(Color(hex: 0xF2EFE6))
+            .overlay(Rectangle().stroke(INTR.border, lineWidth: 2))
         }
         .frame(maxWidth: .infinity)
+        .layoutPriority(ratio > 1 ? 1 : 0)
+        .frame(minWidth: ratio > 1 ? 360 : 120)
     }
 }
 
@@ -138,17 +151,19 @@ struct TagChip: View {
 
     var body: some View {
         HStack(spacing: 4) {
-            Text(tag)
+            Text(tag.uppercased())
+                .font(.caption.bold())
+                .foregroundColor(INTR.text)
             Button(action: onRemove) {
-                Image(systemName: "xmark.circle.fill")
-                    .font(.caption)
+                Image(systemName: "xmark")
+                    .font(.caption2.bold())
+                    .foregroundColor(INTR.red)
             }
-            .buttonStyle(.borderless)
+            .buttonStyle(.plain)
         }
         .padding(.horizontal, 8)
         .padding(.vertical, 3)
-        .background(
-            Capsule().fill(Color.accentColor.opacity(0.15))
-        )
+        .background(INTR.lime)
+        .overlay(Rectangle().stroke(INTR.border, lineWidth: 2))
     }
 }

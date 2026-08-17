@@ -25,47 +25,59 @@ struct LectureView: View {
     var body: some View {
         VStack(spacing: 10) {
             HStack {
-                Text("Режим лекции")
-                    .font(.headline)
+                Rectangle()
+                    .fill(INTR.red)
+                    .frame(width: 10, height: 30)
+                Text("РЕЖИМ ЛЕКЦИИ")
+                    .font(INTR.fontHeader)
+                    .foregroundColor(INTR.text)
                 Spacer()
-                Button("Отмена") { isPresented = false }
+                Button("ОТМЕНА") { isPresented = false }
+                    .buttonStyle(.plain)
+                    .font(.caption.bold())
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 8)
+                    .overlay(Rectangle().stroke(INTR.border, lineWidth: 2))
                     .keyboardShortcut(.cancelAction)
             }
 
             TextEditor(text: $text)
-                .font(.body)
-                .padding(8)
-                .background(
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(Color(nsColor: .textBackgroundColor))
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .strokeBorder(Color.secondary.opacity(0.3))
-                )
+                .font(INTR.fontBody)
+                .scrollContentBackground(.hidden)
+                .foregroundColor(INTR.text)
+                .padding(10)
+                .background(Color(hex: 0xF2EFE6))
+                .overlay(Rectangle().stroke(INTR.border, lineWidth: 2))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
 
             HStack {
-                CounterView(label: "Символов", value: stats.characters)
-                Divider().frame(height: 26)
-                CounterView(label: "Слов", value: stats.words)
-                Divider().frame(height: 26)
-                CounterView(label: "Предложений", value: stats.sentences)
+                CounterView(label: "СИМВОЛЫ", value: stats.characters)
+                Rectangle().fill(INTR.border).frame(width: 2, height: 26)
+                CounterView(label: "СЛОВА", value: stats.words)
+                Rectangle().fill(INTR.border).frame(width: 2, height: 26)
+                CounterView(label: "ПРЕДЛОЖ.", value: stats.sentences)
                 Spacer()
 
                 Button(action: finishLecture) {
                     if isGenerating {
-                        HStack { ProgressView().controlSize(.small); Text("Генерация…") }
+                        HStack { ProgressView().controlSize(.small); Text("ГЕНЕРАЦИЯ…") }
                     } else {
-                        Label("Лекция окончена", systemImage: "checkmark.circle.fill")
+                        Label("ЛЕКЦИЯ ОКОНЧЕНА", systemImage: "checkmark")
                     }
                 }
-                .buttonStyle(.borderedProminent)
+                .font(.system(.body, design: .default).weight(.black))
+                .foregroundColor(INTR.text)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
+                .background(INTR.lime)
+                .overlay(Rectangle().stroke(INTR.border, lineWidth: 2))
                 .disabled(text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isGenerating)
+                .opacity(text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? 0.5 : 1)
             }
             .padding(.horizontal, 4)
         }
         .padding(16)
+        .background(INTR.background)
         .sheet(isPresented: $showSummary) {
             LectureSummaryView(
                 stats: stats,
@@ -176,10 +188,11 @@ private struct CounterView: View {
     var body: some View {
         HStack(spacing: 6) {
             Text(label)
-                .font(.caption)
-                .foregroundStyle(.secondary)
+                .font(.caption.bold())
+                .foregroundColor(INTR.concrete)
             Text("\(value)")
-                .font(.callout.monospacedDigit().bold())
+                .font(.callout.monospacedDigit().weight(.black))
+                .foregroundColor(INTR.text)
         }
     }
 }
@@ -193,44 +206,60 @@ private struct LectureSummaryView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Label("Сводка лекции", systemImage: "checkmark.seal.fill")
-                .font(.title2.bold())
+            Rectangle()
+                .fill(INTR.red)
+                .frame(width: 10, height: 38)
 
             VStack(alignment: .leading, spacing: 6) {
-                SummaryRow(label: "Символы", value: "\(stats.characters)")
-                SummaryRow(label: "Слова", value: "\(stats.words)")
-                SummaryRow(label: "Предложения", value: "\(stats.sentences)")
-                SummaryRow(label: "Слов в предложении", value: String(format: "%.1f", stats.wordsPerSentence))
+                SummaryRow(label: "СИМВОЛЫ", value: "\(stats.characters)")
+                SummaryRow(label: "СЛОВА", value: "\(stats.words)")
+                SummaryRow(label: "ПРЕДЛОЖЕНИЯ", value: "\(stats.sentences)")
+                SummaryRow(label: "СЛОВ В ПРЕДЛОЖЕНИИ", value: String(format: "%.1f", stats.wordsPerSentence))
                 SummaryRow(
-                    label: "Длительность",
+                    label: "ДЛИТЕЛЬНОСТЬ",
                     value: Duration.seconds(stats.duration).formatted(.units(allowed: [.minutes, .seconds]))
                 )
             }
+            .padding(12)
+            .background(Color(hex: 0xF2EFE6))
+            .overlay(Rectangle().stroke(INTR.border, lineWidth: 2))
 
             if let errorMessage {
-                Label(errorMessage, systemImage: "exclamationmark.triangle")
-                    .foregroundStyle(.orange)
+                Text(errorMessage)
+                    .font(.caption.bold())
+                    .foregroundColor(INTR.red)
             } else if let note {
                 if note.questions.isEmpty {
                     Text("Конспект создан. ML-модель была недоступна, вопросы не сгенерированы.")
-                        .foregroundStyle(.secondary)
+                        .font(.caption)
+                        .foregroundColor(INTR.concrete)
                 } else {
                     Text("Создан конспект «\(note.title)» с \(note.questions.split(separator: "\n").count) вопросами.")
-                        .foregroundStyle(.secondary)
+                        .font(.caption)
+                        .foregroundColor(INTR.concrete)
                 }
             }
 
             HStack {
-                Button("Закрыть") { onClose() }
+                Button("ЗАКРЫТЬ") { onClose() }
+                    .font(.caption.bold())
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 8)
+                    .overlay(Rectangle().stroke(INTR.border, lineWidth: 2))
+                Spacer()
                 if let note {
-                    Button("Открыть в редакторе") {
-                        onOpen(note)
-                    }
-                    .buttonStyle(.borderedProminent)
+                    Button("ОТКРЫТЬ РЕДАКТОР") { onOpen(note) }
+                        .font(.caption.bold())
+                        .foregroundColor(INTR.text)
+                        .padding(.horizontal, 14)
+                        .padding(.vertical, 8)
+                        .background(INTR.lime)
+                        .overlay(Rectangle().stroke(INTR.border, lineWidth: 2))
                 }
             }
         }
         .padding(24)
+        .background(INTR.background)
     }
 }
 
@@ -239,9 +268,13 @@ private struct SummaryRow: View {
     let value: String
     var body: some View {
         HStack {
-            Text(label).foregroundStyle(.secondary)
+            Text(label)
+                .font(.caption.bold())
+                .foregroundColor(INTR.concrete)
             Spacer()
-            Text(value).fontWeight(.semibold)
+            Text(value)
+                .font(.callout.monospacedDigit().weight(.black))
+                .foregroundColor(INTR.text)
         }
     }
 }

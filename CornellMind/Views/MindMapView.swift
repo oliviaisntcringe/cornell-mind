@@ -10,8 +10,16 @@ struct MindMapView: View {
 
     var body: some View {
         VStack(spacing: 8) {
-            Text("Mind Map")
-                .font(.headline)
+            HStack {
+                Rectangle()
+                    .fill(INTR.lime)
+                    .frame(width: 10, height: 26)
+                Text("MIND MAP")
+                    .font(INTR.fontHeader)
+                    .foregroundColor(INTR.text)
+                Spacer()
+            }
+            .padding(.horizontal, 8)
             GeometryReader { geo in
                 let layout = RadialLayout(root: tree, in: geo.size)
                 Canvas { context, size in
@@ -21,6 +29,7 @@ struct MindMapView: View {
                         drawNode(node, at: point, context: &context)
                     }
                 }
+                .background(INTR.background)
                 .scaleEffect(zoom)
                 .gesture(
                     MagnifyGesture()
@@ -34,6 +43,7 @@ struct MindMapView: View {
             }
         }
         .padding(8)
+        .background(INTR.background)
     }
 
     // MARK: - Drawing
@@ -49,18 +59,18 @@ struct MindMapView: View {
             height: boxHeight
         )
 
-        let path = Path(roundedRect: rect, cornerRadius: 8)
+let path = Path(roundedRect: rect, cornerRadius: 0)
 
         context.fill(
             path,
-            with: .color(isRoot ? Color.accentColor : Color(nsColor: .controlBackgroundColor))
+            with: .color(isRoot ? INTR.graphite : Color(hex: 0xF2EFE6))
         )
-        context.stroke(path, with: .color(Color.secondary.opacity(0.5)), lineWidth: 1)
+        context.stroke(path, with: .color(INTR.border), lineWidth: 2)
 
         let shortened = node.text.count > 40 ? String(node.text.prefix(37)) + "…" : node.text
-        let label = Text(verbatim: shortened)
-            .font(.caption2)
-            .foregroundColor(isRoot ? .white : .primary)
+        let label = Text(verbatim: shortened.uppercased())
+            .font(.system(.caption2, design: .default).weight(.bold))
+            .foregroundColor(isRoot ? INTR.lime : INTR.text)
         context.draw(label, at: CGPoint(x: rect.midX, y: rect.midY), anchor: .center)
     }
 
@@ -73,8 +83,8 @@ struct MindMapView: View {
             path.addQuadCurve(to: to, control: midpoint(from, to))
             context.stroke(
                 path,
-                with: .color(Color.secondary.opacity(0.4)),
-                lineWidth: 1.5
+                with: .color(INTR.concrete.opacity(0.7)),
+                lineWidth: 2
             )
         }
     }

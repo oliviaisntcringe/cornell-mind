@@ -42,14 +42,27 @@ struct ContentView: View {
                 NoteEditorView(note: note)
                     .id(note.id)
             } else {
-                ContentUnavailableView(
-                    "Выберите или создайте конспект",
-                    systemImage: "note.text",
-                    description: Text("Создайте конспект по методу Корнелла — с вопросами, заметками и резюме.")
-                )
+                VStack(spacing: 14) {
+                    Text("INTR.")
+                        .font(INTR.fontDisplay)
+                        .foregroundColor(INTR.lime)
+                        .frame(width: 72, height: 72)
+                        .background(INTR.graphite)
+                        .overlay(Rectangle().stroke(INTR.border, lineWidth: 2))
+                    Text("ВЫБЕРИ ИЛИ СОЗДАЙ КОНСПЕКТ")
+                        .font(.system(.headline, design: .default).weight(.black))
+                        .foregroundColor(INTR.text)
+                    Text("Метод Корнелла + Mind Map + ML")
+                        .font(.caption.bold())
+                        .foregroundColor(INTR.concrete)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(INTR.background)
             }
         }
         .frame(minWidth: 900, minHeight: 600)
+        .background(INTR.background)
+        .preferredColorScheme(.light)
     }
 
     private func newNote() {

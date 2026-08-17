@@ -1,4 +1,4 @@
-name: CornellMind
+name: INTR
 options:
   bundleIdPrefix: dev.gleb
   deploymentTarget:
@@ -16,7 +16,7 @@ packages:
     url: https://github.com/huggingface/swift-transformers
     from: 1.3.0
 targets:
-  CornellMind:
+  INTR:
     type: application
     platform: macOS
     sources:
@@ -39,17 +39,17 @@ targets:
     settings:
       base:
         GENERATE_INFOPLIST_FILE: YES
-        INFOPLIST_KEY_CFBundleDisplayName: Cornell Mind
+        INFOPLIST_KEY_CFBundleDisplayName: INTR.
         INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.productivity
         INFOPLIST_KEY_NSHumanReadableCopyright: ""
-        PRODUCT_NAME: CornellMind
+        PRODUCT_NAME: INTR
         ENABLE_PREVIEWS: YES
         DEVELOPMENT_ASSET_PATHS: ""
 schemes:
-  CornellMind:
+  INTR:
     build:
       targets:
-        CornellMind: all
+        INTR: all
     run:
       config: Debug
     archive:

@@ -15,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BFF3AA65F10AF041509FC495"
-               BuildableName = "CornellMind.app"
-               BlueprintName = "CornellMind"
-               ReferencedContainer = "container:CornellMind.xcodeproj">
+               BlueprintIdentifier = "3C754A351E8101125361E0E2"
+               BuildableName = "INTR.app"
+               BlueprintName = "INTR"
+               ReferencedContainer = "container:INTR.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BFF3AA65F10AF041509FC495"
-            BuildableName = "CornellMind.app"
-            BlueprintName = "CornellMind"
-            ReferencedContainer = "container:CornellMind.xcodeproj">
+            BlueprintIdentifier = "3C754A351E8101125361E0E2"
+            BuildableName = "INTR.app"
+            BlueprintName = "INTR"
+            ReferencedContainer = "container:INTR.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -55,10 +55,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BFF3AA65F10AF041509FC495"
-            BuildableName = "CornellMind.app"
-            BlueprintName = "CornellMind"
-            ReferencedContainer = "container:CornellMind.xcodeproj">
+            BlueprintIdentifier = "3C754A351E8101125361E0E2"
+            BuildableName = "INTR.app"
+            BlueprintName = "INTR"
+            ReferencedContainer = "container:INTR.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -74,10 +74,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BFF3AA65F10AF041509FC495"
-            BuildableName = "CornellMind.app"
-            BlueprintName = "CornellMind"
-            ReferencedContainer = "container:CornellMind.xcodeproj">
+            BlueprintIdentifier = "3C754A351E8101125361E0E2"
+            BuildableName = "INTR.app"
+            BlueprintName = "INTR"
+            ReferencedContainer = "container:INTR.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>

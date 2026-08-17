@@ -13,38 +13,45 @@ struct NotesListView: View {
         List(selection: $selection) {
             ForEach(notes) { note in
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(note.title.isEmpty ? "Без названия" : note.title)
-                        .font(.headline)
+                    Text(note.title.isEmpty ? "БЕЗ НАЗВАНИЯ" : note.title.uppercased())
+                        .font(.system(.headline, design: .default).weight(.black))
+                        .foregroundColor(INTR.text)
                         .lineLimit(1)
                     HStack(spacing: 6) {
                         Text(note.updatedAt, style: .date)
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .font(.caption.monospacedDigit())
+                            .foregroundColor(INTR.concrete)
                         if !note.tags.isEmpty {
-                            Text(note.tags.joined(separator: ", "))
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
+                            Text(note.tags.joined(separator: " · ").uppercased())
+                                .font(.caption2)
+                                .foregroundColor(INTR.red)
                                 .lineLimit(1)
                         }
                     }
                 }
-                .padding(.vertical, 2)
+                .padding(.vertical, 4)
                 .tag(note)
             }
             .onDelete(perform: onDelete)
         }
-        .searchable(text: $searchText, prompt: "Поиск по заголовку, тегам…")
-        .navigationTitle("Конспекты")
+        .listStyle(.inset)
+        .scrollContentBackground(.hidden)
+        .searchable(text: $searchText, prompt: "ПОИСК")
+        .navigationTitle("INTR.")
+        .navigationSubtitle("КОНСПЕКТЫ")
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button(action: onLecture) {
-                    Label("Режим лекции", systemImage: "mic")
+                    Label("ЛЕКЦИЯ", systemImage: "mic")
                 }
+                .buttonStyle(.bordered)
             }
             ToolbarItem(placement: .primaryAction) {
                 Button(action: onNew) {
-                    Label("Новый конспект", systemImage: "plus")
+                    Label("НОВЫЙ", systemImage: "plus")
                 }
+                .buttonStyle(.borderedProminent)
+                .tint(INTR.lime)
             }
         }
     }
