@@ -42,7 +42,8 @@ final class MLService: @unchecked Sendable {
             return nil
         }
         let config = MLModelConfiguration()
-        config.computeUnits = .all
+        // Только CPU: модель 1 ГБ на Intel/Metal → MPSGraph падает в VM allocation.
+        config.computeUnits = .cpuOnly
         return try? MLModel(contentsOf: url, configuration: config)
     }
 
@@ -116,7 +117,7 @@ final class MLService: @unchecked Sendable {
     private static let qgVocabSize = 250_112  // mT5
     private static let padTokenId = 0
     private static let eosTokenId = 1
-    private static let maxNewTokens = 40
+    private static let maxNewTokens = 24
 
     /// Герерирует вопросы по заметке, разбивая её на абзацы (это сглаживает
     /// ограничение длины энкодера). Возвращает вопросы, либо пустой массив.
@@ -213,33 +214,33 @@ final class MLService: @unchecked Sendable {
             guard currentLen <= Self.qgMaxLength else { break }
 
             guard
-                let inputIds = MLMultiArray.makeInt32(Self.qgMaxLength, value: Self.padTokenId),
-                let attentionMask = MLMultiArray.makeInt32(Self.qgMaxLength, value: 0),
-                let encoderAttention = MLMultiArray.makeInt32(Self.qgMaxLength, value: 0)
-            else { return gen }
+                let prediction = autoreleasepool({ () -> MLFeatureProvider? in
+                guard
+                    let inputIds = MLMultiArray.makeInt32(Self.qgMaxLength, value: Self.padTokenId),
+                    let attentionMask = MLMultiArray.makeInt32(Self.qgMaxLength, value: 0),
+                    let encoderAttention = MLMultiArray.makeInt32(Self.qgMaxLength, value: 0)
+                else { return nil }
 
-            for (i, v) in gen.enumerated() {
-                inputIds[i] = NSNumber(value: v)
-                attentionMask[i] = 1
-            }
-            for i in 0..<encoder.length {
-                encoderAttention[i] = 1
-            }
+                for (i, v) in gen.enumerated() {
+                    inputIds[i] = NSNumber(value: v)
+                    attentionMask[i] = 1
+                }
+                for i in 0..<encoder.length {
+                    encoderAttention[i] = 1
+                }
 
-            let prediction: MLFeatureProvider
-            do {
-                let provider = try MLDictionaryFeatureProvider(dictionary: [
-                    "decoder_input_ids": inputIds,
-                    "decoder_attention_mask": attentionMask,
-                    "encoder_last_hidden_state": encoder.hidden,
-                    "encoder_attention_mask": encoderAttention,
-                ])
-                prediction = try decoder.prediction(from: provider)
-            } catch {
-                return gen
-            }
-
-            guard
+                do {
+                    let provider = try MLDictionaryFeatureProvider(dictionary: [
+                        "decoder_input_ids": inputIds,
+                        "decoder_attention_mask": attentionMask,
+                        "encoder_last_hidden_state": encoder.hidden,
+                        "encoder_attention_mask": encoderAttention,
+                    ])
+                    return try decoder.prediction(from: provider)
+                } catch {
+                    return nil
+                }
+            }),
                 let logitsRaw = prediction.featureValue(for: "logits")?.multiArrayValue
             else { return gen }
 

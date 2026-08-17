@@ -65,10 +65,10 @@ struct LectureView: View {
                         Label("ЛЕКЦИЯ ОКОНЧЕНА", systemImage: "checkmark")
                     }
                 }
-                .font(.system(.body, design: .default).weight(.black))
+                .font(.system(.headline, design: .default).weight(.black))
                 .foregroundColor(INTR.text)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 10)
+                .padding(.horizontal, 18)
+                .frame(height: 36)
                 .background(INTR.lime)
                 .overlay(Rectangle().stroke(INTR.border, lineWidth: 2))
                 .disabled(text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isGenerating)

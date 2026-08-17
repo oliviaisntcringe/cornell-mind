@@ -64,10 +64,10 @@ struct NotesListView: View {
         HStack(spacing: 8) {
             Button(action: onNew) {
                 Label("НОВЫЙ", systemImage: "plus")
-                    .font(.system(.caption, design: .default).weight(.black))
+                    .font(.system(.headline, design: .default).weight(.black))
                     .foregroundColor(INTR.text)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 9)
+                    .frame(height: 34)
+                    .padding(.horizontal, 16)
                     .background(INTR.lime)
                     .overlay(Rectangle().stroke(INTR.border, lineWidth: 2))
             }
@@ -75,10 +75,10 @@ struct NotesListView: View {
 
             Button(action: onLecture) {
                 Label("ЛЕКЦИЯ", systemImage: "mic")
-                    .font(.system(.caption, design: .default).weight(.black))
+                    .font(.system(.headline, design: .default).weight(.black))
                     .foregroundColor(INTR.text)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 9)
+                    .frame(height: 34)
+                    .padding(.horizontal, 16)
                     .background(INTR.red)
                     .overlay(Rectangle().stroke(INTR.border, lineWidth: 2))
             }
@@ -86,7 +86,7 @@ struct NotesListView: View {
             Spacer()
         }
         .padding(.horizontal, 12)
-        .padding(.vertical, 10)
+        .padding(.vertical, 8)
         .background(INTR.background)
     }
 }
