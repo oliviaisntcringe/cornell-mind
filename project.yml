@@ -20,13 +20,16 @@ targets:
     type: application
     platform: macOS
     sources:
-      - CornellMind
-    resources:
-      - path: CornellMind/Resources/Models
+      - path: CornellMind
+        excludes:
+          - Resources/Tokenizer
+          - Resources/Models
       - path: CornellMind/Resources/Tokenizer/QG
         type: folder
       - path: CornellMind/Resources/Tokenizer/Embedder
         type: folder
+    resources:
+      - CornellMind/Resources/Models
     dependencies:
       - package: SwiftTransformers
         product: Tokenizers

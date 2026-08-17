@@ -7,51 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0BD97C1E07951BB14EC5A9A2 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B857433D7F4CB0B65B5C167 /* Note.swift */; };
 		248AAA0C0CA83F3496AA4D07 /* AppTokenizers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A84E2F3235F7B783E89F03C /* AppTokenizers.swift */; };
 		2E640661865EA5257851E56D /* MindMapBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6FB1B407D2087984195EF /* MindMapBuilder.swift */; };
 		32A1501611AC449754EE4409 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724323BD7F08C69B9B98364 /* ContentView.swift */; };
-		358BABE46E1BB2EE32E237B6 /* QGEncoder.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 9CCEA6D8148C991EF0293DC1 /* QGEncoder.mlpackage */; };
 		38B10CAA9047B84B48A23E73 /* NotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B10C444D5348BCC2DE930D9 /* NotesListView.swift */; };
-		39A9313EFC42B847B6AD8AD8 /* special_tokens_map.json in Resources */ = {isa = PBXBuildFile; fileRef = CAA9BEEEC4259BC9DBC00FD0 /* special_tokens_map.json */; };
 		3FE44C581B0D9FEC7893A58D /* MindMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4F9585DE1884FC17C1E222 /* MindMapView.swift */; };
+		4AC556A54AB7C62B9EF10EA1 /* Embedder in Resources */ = {isa = PBXBuildFile; fileRef = C09FAF7C051B127AEAC413C2 /* Embedder */; };
 		4C5539345075DB43B915153A /* MLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86109D31A79F68490CB263 /* MLService.swift */; };
 		50746286F8A738958EE68E50 /* CornellMindApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC259B4480BB6E9CACA0134 /* CornellMindApp.swift */; };
-		62625065D29EE368FFC80D04 /* TOKENIZERS.md in Resources */ = {isa = PBXBuildFile; fileRef = 592D35BEC34F710E108B1762 /* TOKENIZERS.md */; };
-		6ECF1B80E1FFD67F4A64B807 /* tokenizer.json in Resources */ = {isa = PBXBuildFile; fileRef = FF828B62A9D6D2964AF4083A /* tokenizer.json */; };
-		7C485AEFB1FECEB39DCCC5A2 /* Embedder.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = A37A05A90972D58DC1F94384 /* Embedder.mlpackage */; };
-		970F9B556293165084E7CD02 /* special_tokens_map.json in Resources */ = {isa = PBXBuildFile; fileRef = ADB75DE28F193135B770D2CF /* special_tokens_map.json */; };
+		6244FC05F1A25475FD00C75D /* Flashcard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E5EE8750423B13B4383CFC /* Flashcard.swift */; };
+		6D2E387C4FD9DEE73D75F80D /* QG in Resources */ = {isa = PBXBuildFile; fileRef = 8E487A98A2E417F5F7E126EA /* QG */; };
 		9D989B9F593A82521F9E8AC3 /* NoteEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67971CE7C6CE7393614C6E1 /* NoteEditorView.swift */; };
-		B66C07A8A699ECF4AC03AC6C /* tokenizer_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 76BA15CF0F428178C1280B81 /* tokenizer_config.json */; };
-		B7B70F37A899724E9081552A /* tokenizer.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F961BB8986129B86C4960AF /* tokenizer.json */; };
 		BA2551DD7B82270F495A4017 /* TextStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379BE328E0C75A43C85145FC /* TextStats.swift */; };
-		BC4C026277779B4B6229BF62 /* tokenizer_config.json in Resources */ = {isa = PBXBuildFile; fileRef = 33FA0D96415A00D8E6553D92 /* tokenizer_config.json */; };
 		E1F908207C67D7EA9D7B9474 /* LectureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2F60212FC4161070A8B9EC /* LectureView.swift */; };
-		E8985B421FE0536A8730F298 /* QGDecoder.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 5D26E5A3161E2A461C532D94 /* QGDecoder.mlpackage */; };
 		F27C4772A6A9FCE667C0399B /* Tokenizers in Frameworks */ = {isa = PBXBuildFile; productRef = 324DC1BD080E5A191EB98F14 /* Tokenizers */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0A84E2F3235F7B783E89F03C /* AppTokenizers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTokenizers.swift; sourceTree = "<group>"; };
 		0C2F60212FC4161070A8B9EC /* LectureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectureView.swift; sourceTree = "<group>"; };
-		33FA0D96415A00D8E6553D92 /* tokenizer_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = tokenizer_config.json; sourceTree = "<group>"; };
 		379BE328E0C75A43C85145FC /* TextStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStats.swift; sourceTree = "<group>"; };
-		592D35BEC34F710E108B1762 /* TOKENIZERS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = TOKENIZERS.md; sourceTree = "<group>"; };
-		5D26E5A3161E2A461C532D94 /* QGDecoder.mlpackage */ = {isa = PBXFileReference; path = QGDecoder.mlpackage; sourceTree = "<group>"; };
+		50E5EE8750423B13B4383CFC /* Flashcard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flashcard.swift; sourceTree = "<group>"; };
 		6B10C444D5348BCC2DE930D9 /* NotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListView.swift; sourceTree = "<group>"; };
 		6F86109D31A79F68490CB263 /* MLService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLService.swift; sourceTree = "<group>"; };
-		76BA15CF0F428178C1280B81 /* tokenizer_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = tokenizer_config.json; sourceTree = "<group>"; };
-		7F961BB8986129B86C4960AF /* tokenizer.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = tokenizer.json; sourceTree = "<group>"; };
-		9CCEA6D8148C991EF0293DC1 /* QGEncoder.mlpackage */ = {isa = PBXFileReference; path = QGEncoder.mlpackage; sourceTree = "<group>"; };
-		A37A05A90972D58DC1F94384 /* Embedder.mlpackage */ = {isa = PBXFileReference; path = Embedder.mlpackage; sourceTree = "<group>"; };
-		ADB75DE28F193135B770D2CF /* special_tokens_map.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = special_tokens_map.json; sourceTree = "<group>"; };
+		7B857433D7F4CB0B65B5C167 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		8E487A98A2E417F5F7E126EA /* QG */ = {isa = PBXFileReference; lastKnownFileType = folder; name = QG; path = CornellMind/Resources/Tokenizer/QG; sourceTree = SOURCE_ROOT; };
 		BA4F9585DE1884FC17C1E222 /* MindMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindMapView.swift; sourceTree = "<group>"; };
-		CAA9BEEEC4259BC9DBC00FD0 /* special_tokens_map.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = special_tokens_map.json; sourceTree = "<group>"; };
+		C09FAF7C051B127AEAC413C2 /* Embedder */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Embedder; path = CornellMind/Resources/Tokenizer/Embedder; sourceTree = SOURCE_ROOT; };
 		D499C4C40BBD56523F2B1D71 /* CornellMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CornellMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D67971CE7C6CE7393614C6E1 /* NoteEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorView.swift; sourceTree = "<group>"; };
 		D724323BD7F08C69B9B98364 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DAC259B4480BB6E9CACA0134 /* CornellMindApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornellMindApp.swift; sourceTree = "<group>"; };
 		E5D6FB1B407D2087984195EF /* MindMapBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindMapBuilder.swift; sourceTree = "<group>"; };
-		FF828B62A9D6D2964AF4083A /* tokenizer.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = tokenizer.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,21 +54,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0274663A2279D2D36989884F /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				A37A05A90972D58DC1F94384 /* Embedder.mlpackage */,
-				5D26E5A3161E2A461C532D94 /* QGDecoder.mlpackage */,
-				9CCEA6D8148C991EF0293DC1 /* QGEncoder.mlpackage */,
-				592D35BEC34F710E108B1762 /* TOKENIZERS.md */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		12353E3A22B60E8BCB9DC46A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0274663A2279D2D36989884F /* Models */,
 				2CE706262AD80824A0D4E362 /* Tokenizer */,
 			);
 			path = Resources;
@@ -89,35 +65,17 @@
 		2CE706262AD80824A0D4E362 /* Tokenizer */ = {
 			isa = PBXGroup;
 			children = (
-				4700EC2A162E4166B4DF66CF /* Embedder */,
-				3F161E565841604B65DCC508 /* QG */,
+				C09FAF7C051B127AEAC413C2 /* Embedder */,
+				8E487A98A2E417F5F7E126EA /* QG */,
 			);
 			path = Tokenizer;
-			sourceTree = "<group>";
-		};
-		3F161E565841604B65DCC508 /* QG */ = {
-			isa = PBXGroup;
-			children = (
-				CAA9BEEEC4259BC9DBC00FD0 /* special_tokens_map.json */,
-				33FA0D96415A00D8E6553D92 /* tokenizer_config.json */,
-				7F961BB8986129B86C4960AF /* tokenizer.json */,
-			);
-			path = QG;
-			sourceTree = "<group>";
-		};
-		4700EC2A162E4166B4DF66CF /* Embedder */ = {
-			isa = PBXGroup;
-			children = (
-				ADB75DE28F193135B770D2CF /* special_tokens_map.json */,
-				76BA15CF0F428178C1280B81 /* tokenizer_config.json */,
-				FF828B62A9D6D2964AF4083A /* tokenizer.json */,
-			);
-			path = Embedder;
 			sourceTree = "<group>";
 		};
 		49C15488FE33A700B6924883 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				50E5EE8750423B13B4383CFC /* Flashcard.swift */,
+				7B857433D7F4CB0B65B5C167 /* Note.swift */,
 				379BE328E0C75A43C85145FC /* TextStats.swift */,
 			);
 			path = Models;
@@ -245,13 +203,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62625065D29EE368FFC80D04 /* TOKENIZERS.md in Resources */,
-				970F9B556293165084E7CD02 /* special_tokens_map.json in Resources */,
-				39A9313EFC42B847B6AD8AD8 /* special_tokens_map.json in Resources */,
-				6ECF1B80E1FFD67F4A64B807 /* tokenizer.json in Resources */,
-				B7B70F37A899724E9081552A /* tokenizer.json in Resources */,
-				B66C07A8A699ECF4AC03AC6C /* tokenizer_config.json in Resources */,
-				BC4C026277779B4B6229BF62 /* tokenizer_config.json in Resources */,
+				4AC556A54AB7C62B9EF10EA1 /* Embedder in Resources */,
+				6D2E387C4FD9DEE73D75F80D /* QG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,15 +218,14 @@
 				248AAA0C0CA83F3496AA4D07 /* AppTokenizers.swift in Sources */,
 				32A1501611AC449754EE4409 /* ContentView.swift in Sources */,
 				50746286F8A738958EE68E50 /* CornellMindApp.swift in Sources */,
-				7C485AEFB1FECEB39DCCC5A2 /* Embedder.mlpackage in Sources */,
+				6244FC05F1A25475FD00C75D /* Flashcard.swift in Sources */,
 				E1F908207C67D7EA9D7B9474 /* LectureView.swift in Sources */,
 				4C5539345075DB43B915153A /* MLService.swift in Sources */,
 				2E640661865EA5257851E56D /* MindMapBuilder.swift in Sources */,
 				3FE44C581B0D9FEC7893A58D /* MindMapView.swift in Sources */,
+				0BD97C1E07951BB14EC5A9A2 /* Note.swift in Sources */,
 				9D989B9F593A82521F9E8AC3 /* NoteEditorView.swift in Sources */,
 				38B10CAA9047B84B48A23E73 /* NotesListView.swift in Sources */,
-				E8985B421FE0536A8730F298 /* QGDecoder.mlpackage in Sources */,
-				358BABE46E1BB2EE32E237B6 /* QGEncoder.mlpackage in Sources */,
 				BA2551DD7B82270F495A4017 /* TextStats.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

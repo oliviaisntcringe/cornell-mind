@@ -4,11 +4,14 @@ import Tokenizers
 /// Универсальный загрузчик токенизаторов из бандла через swift-transformers.
 /// Требуется macOS 13+, продукт `Tokenizers` из swift-transformers.
 struct AppTokenizers {
-    /// Загружает токенизатор из папки в бандле (subdirectory внутри Resources/Tokenizer).
+    /// Загружает токенизатор из папки-фolder reference в бандле.
     static func load(folder: String) async throws -> any Tokenizer {
-        guard let url = Bundle.main.url(forResource: nil, withExtension: nil, subdirectory: "Tokenizer/\(folder)") else {
+        // Папки QG/Embedder копируются в бандл как folder references
+        // (Contents/Resources/QG, Contents/Resources/Embedder).
+        guard let resourceURL = Bundle.main.resourceURL else {
             throw MLError.tokenizerNotFound(folder)
         }
+        let url = resourceURL.appendingPathComponent(folder)
         // swift-transformers ожидает папку с tokenizer_config.json + tokenizer.json
         let hasConfig = FileManager.default.fileExists(atPath: url.appendingPathComponent("tokenizer_config.json").path)
         let hasData = FileManager.default.fileExists(atPath: url.appendingPathComponent("tokenizer.json").path)
