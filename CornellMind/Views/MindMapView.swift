@@ -60,8 +60,7 @@ struct MindMapView: View {
         let shortened = node.text.count > 40 ? String(node.text.prefix(37)) + "…" : node.text
         let label = Text(verbatim: shortened)
             .font(.caption2)
-            .foregroundStyle(isRoot ? Color.white : Color.primary)
-            .multilineTextAlignment(.center)
+            .foregroundColor(isRoot ? .white : .primary)
         context.draw(label, at: CGPoint(x: rect.midX, y: rect.midY), anchor: .center)
     }
 
