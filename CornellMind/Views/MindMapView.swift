@@ -58,13 +58,11 @@ struct MindMapView: View {
         context.stroke(path, with: .color(Color.secondary.opacity(0.5)), lineWidth: 1)
 
         let shortened = node.text.count > 40 ? String(node.text.prefix(37)) + "…" : node.text
-        context.draw(
-            Text(shortened as String)
-                .font(.caption2)
-                .foregroundColor(isRoot ? .white : Color.primary)
-                .multilineTextAlignment(.center),
-            at: CGPoint(x: rect.midX, y: rect.midY)
-        )
+        let label = Text(verbatim: shortened)
+            .font(.caption2)
+            .foregroundStyle(isRoot ? Color.white : Color.primary)
+            .multilineTextAlignment(.center)
+        context.draw(label, at: CGPoint(x: rect.midX, y: rect.midY), anchor: .center)
     }
 
     private func drawEdges(_ layout: RadialLayout, context: inout GraphicsContext) {

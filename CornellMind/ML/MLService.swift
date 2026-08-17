@@ -74,10 +74,11 @@ final class MLService: @unchecked Sendable {
         }
 
         guard
-            let output = try? model.prediction(from: [
+            let provider = try? MLDictionaryFeatureProvider(dictionary: [
                 "input_ids": inputIds,
                 "attention_mask": attentionMask,
             ]),
+            let output = try? model.prediction(from: provider),
             let hidden = output.featureValue(for: "last_hidden_state")?.multiArrayValue
         else { return nil }
 
@@ -95,12 +96,12 @@ final class MLService: @unchecked Sendable {
 
     /// Подбирает теги по косинусному расстоянию к кандидатным темам.
     func suggestTags(for text: String, candidates: [String], tokenizer: EmbedTokenizer?, threshold: Double = 0.30) -> [TagScore] {
-        guard let embedding = embedding(for: text, tokenizer: tokenizer) else { return [] }
+        guard let noteEmbedding = embedding(for: text, tokenizer: tokenizer) else { return [] }
 
         var scores: [TagScore] = []
         for candidate in candidates {
             guard let candEmb = embedding(for: candidate, tokenizer: tokenizer) else { continue }
-            let dot = zip(embedding, candEmb).reduce(0.0) { $0 + $1.0 * $1.1 }
+            let dot = zip(noteEmbedding, candEmb).reduce(0.0) { $0 + $1.0 * $1.1 }
             if dot >= threshold {
                 scores.append(TagScore(tag: candidate, score: dot))
             }
@@ -188,10 +189,13 @@ final class MLService: @unchecked Sendable {
             attentionMask[i] = 1
         }
 
-        guard let output = try? model.prediction(from: [
-            "input_ids": inputIds,
-            "attention_mask": attentionMask,
-        ]), let hidden = output.featureValue(for: "last_hidden_state")?.multiArrayValue
+        guard
+            let provider = try? MLDictionaryFeatureProvider(dictionary: [
+                "input_ids": inputIds,
+                "attention_mask": attentionMask,
+            ]),
+            let output = try? model.prediction(from: provider),
+            let hidden = output.featureValue(for: "last_hidden_state")?.multiArrayValue
         else { return nil }
 
         return EncoderOutput(hidden: hidden, length: len)
@@ -224,12 +228,13 @@ final class MLService: @unchecked Sendable {
 
             let prediction: MLFeatureProvider
             do {
-                prediction = try decoder.prediction(from: [
+                let provider = try MLDictionaryFeatureProvider(dictionary: [
                     "decoder_input_ids": inputIds,
                     "decoder_attention_mask": attentionMask,
                     "encoder_last_hidden_state": encoder.hidden,
                     "encoder_attention_mask": encoderAttention,
                 ])
+                prediction = try decoder.prediction(from: provider)
             } catch {
                 return gen
             }
