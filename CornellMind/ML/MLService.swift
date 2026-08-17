@@ -214,7 +214,7 @@ final class MLService: @unchecked Sendable {
             guard currentLen <= Self.qgMaxLength else { break }
 
             guard
-                let prediction = autoreleasepool({ () -> MLFeatureProvider? in
+                let prediction = autoreleasepool(invoking: { () -> MLFeatureProvider? in
                 guard
                     let inputIds = MLMultiArray.makeInt32(Self.qgMaxLength, value: Self.padTokenId),
                     let attentionMask = MLMultiArray.makeInt32(Self.qgMaxLength, value: 0),
