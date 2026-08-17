@@ -6,7 +6,7 @@ transformers>=4.40,<5
 coremltools>=8
 numpy<2
 sentencepiece
-"tokenizers>=0.22,<=0.23"
+tokenizers>=0.22,<=0.23
 safetensors
 huggingface_hub>=0.23
 protobuf
