@@ -3,9 +3,13 @@ import SwiftUI
 struct MindMapView: View {
     let note: Note
     @State private var zoom: CGFloat = 1.0
+    @State private var tree: MindMapNode?
 
-    private var tree: MindMapNode {
-        MindMapBuilder.build(from: note)
+    private var resolvedTree: MindMapNode {
+        if let tree { return tree }
+        let built = MindMapBuilder.build(from: note)
+        Task { @MainActor in self.tree = built }
+        return built
     }
 
     var body: some View {
@@ -21,10 +25,10 @@ struct MindMapView: View {
             }
             .padding(.horizontal, 8)
             GeometryReader { geo in
-                let layout = RadialLayout(root: tree, in: geo.size)
+                let layout = RadialLayout(root: resolvedTree, in: geo.size)
                 Canvas { context, size in
                     drawEdges(layout, context: &context)
-                    for node in layout.allNodes {
+                    for node in layout.drawnNodes {
                         let point = layout.position(of: node.id)
                         drawNode(node, at: point, context: &context)
                     }
@@ -49,7 +53,7 @@ struct MindMapView: View {
     // MARK: - Drawing
 
     private func drawNode(_ node: MindMapNode, at point: CGPoint, context: inout GraphicsContext) {
-        let isRoot = node.text == tree.text && node.children.count > 0
+        let isRoot = node.text == resolvedTree.text && node.children.count > 0
         let boxWidth: CGFloat = isRoot ? 140 : 120
         let boxHeight: CGFloat = 34
         let rect = CGRect(
@@ -133,7 +137,7 @@ struct RadialLayout {
                 positions[child.id] = point
                 edges.append(Edge(parent: root.id, child: child.id))
 
-                let grandchildren = child.children.count > 8 ? Array(child.children.prefix(8)) : child.children
+                let grandchildren = child.children.count > 5 ? Array(child.children.prefix(5)) : child.children
                 for (gIndex, grandchild) in grandchildren.enumerated() {
                     let spiral = 1.35 + Double(gIndex) * 0.22
                     let gRadius = baseRadius * CGFloat(spiral)
@@ -154,6 +158,15 @@ struct RadialLayout {
 
     var allNodes: [MindMapNode] {
         collect(root)
+    }
+
+    /// Только узлы, у которых есть позиция (иначе рисовались бы в углу).
+    var drawnNodes: [MindMapNode] {
+        allNodes.filter { positions[$0.id] != nil }
+    }
+
+    var drawnCount: Int {
+        positions.count
     }
 
     func position(of id: UUID) -> CGPoint {

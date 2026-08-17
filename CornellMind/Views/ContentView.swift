@@ -26,8 +26,9 @@ struct ContentView: View {
                 selection: $selectedNote,
                 searchText: $searchText,
                 onNew: { newNote() },
-                onDelete: { delete($0) },
-                onLecture: { isLectureMode = true }
+                onLecture: { isLectureMode = true },
+                onDelete: { note in delete(note) },
+                onRename: { note, title in rename(note, to: title) }
             )
         } detail: {
             if isLectureMode {
@@ -71,14 +72,15 @@ struct ContentView: View {
         selectedNote = note
     }
 
-    private func delete(_ indexSet: IndexSet) {
-        for index in indexSet {
-            if filteredNotes.indices.contains(index) {
-                let note = filteredNotes[index]
-                if selectedNote?.id == note.id { selectedNote = nil }
-                modelContext.delete(note)
-            }
-        }
+    private func delete(_ note: Note) {
+        if selectedNote?.id == note.id { selectedNote = nil }
+        modelContext.delete(note)
+        try? modelContext.save()
+    }
+
+    private func rename(_ note: Note, to newTitle: String) {
+        note.title = newTitle
+        note.updatedAt = .now
         try? modelContext.save()
     }
 }

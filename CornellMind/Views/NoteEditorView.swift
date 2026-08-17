@@ -13,11 +13,11 @@ struct NoteEditorView: View {
                 Rectangle()
                     .fill(INTR.lime)
                     .frame(width: 10, height: 38)
-                Text(note.title.isEmpty ? "БЕЗ НАЗВАНИЯ" : note.title.uppercased())
+                TextField("НАЗВАНИЕ", text: $note.title)
+                    .textFieldStyle(.plain)
                     .font(INTR.fontHeader)
                     .foregroundColor(INTR.text)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.6)
+                    .onSubmit { note.updatedAt = .now }
                 Spacer()
             }
 

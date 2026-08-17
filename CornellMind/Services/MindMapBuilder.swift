@@ -7,6 +7,10 @@ struct MindMapNode: Identifiable {
 }
 
 enum MindMapBuilder {
+    /// Максимум ветвей и листьев, чтобы граф оставался быстрым и читаемым.
+    static let maxQuestions = 6
+    static let maxLeavesPerQuestion = 4
+
     /// Строит дерево майндмапа из конспекта Корнелла:
     /// центр — тема, ветви первого уровня — ключевые вопросы,
     /// листья — строки заметок.
@@ -15,6 +19,7 @@ enum MindMapBuilder {
             .split(whereSeparator: \.isNewline)
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .filter { !$0.isEmpty }
+            .prefix(maxQuestions)
 
         let noteLines = note.notes
             .split(whereSeparator: \.isNewline)
@@ -33,14 +38,10 @@ enum MindMapBuilder {
 
         var children: [MindMapNode] = []
         for question in questions {
-            var leaves: [MindMapNode] = []
             let related = noteLines.filter { $0.localizedCaseInsensitiveContains(questionPrefix(question)) }
-            if related.isEmpty {
-                leaves = noteLines.map { MindMapNode(text: $0) }
-            } else {
-                leaves = related.map { MindMapNode(text: $0) }
-            }
-            children.append(MindMapNode(text: question, children: leaves))
+            let base = related.isEmpty ? noteLines : related
+            let leaves = base.prefix(maxLeavesPerQuestion).map { MindMapNode(text: $0) }
+            children.append(MindMapNode(text: question, children: Array(leaves)))
         }
 
         if !note.summary.isEmpty {
