@@ -1,0 +1,18 @@
+# ML: генерируются скриптом ml/convert_models.py (CI тоже их собирает)
+CornellMind/Resources/Models/
+CornellMind/Resources/Tokenizer/
+ml/venv/
+ml/qg_tmp/
+ml/qg_mt5/
+ml/mt5_local/
+ml/tok_mt5/
+ml/tok_embed/
+ml/exporters/
+ml/__pycache__/
+
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+.DS_Store

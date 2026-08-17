@@ -1,0 +1,72 @@
+name: Build
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-14
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install ML deps
+        run: |
+          pip install -r ml/requirements.txt
+          # exporters ставится из репозитория HF (в git не хранится)
+          pip install "exporters @ git+https://github.com/huggingface/exporters.git"
+
+      - name: Install xcodegen
+        run: brew install xcodegen
+
+      - name: Convert models to CoreML (Embedder + QG T5)
+        run: python ml/convert_models.py
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: List resources
+        run: ls -la CornellMind/Resources/Models/
+
+      - name: Build app (ad-hoc signing)
+        run: |
+          xcodebuild \
+            -project CornellMind.xcodeproj \
+            -scheme CornellMind \
+            -configuration Release \
+            -derivedDataPath build \
+            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Report build products
+        run: find build/Build/Products -name "*.app" -maxdepth 3
+
+      - name: Package .app as zip
+        run: |
+          APP=$(find build/Build/Products/Release -maxdepth 1 -name "*.app" | head -n1)
+          echo "Packaging: $APP"
+          cd build/Build/Products/Release
+          zip -qry CornellMind-macOS.zip "$(basename "$APP")"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CornellMind-macOS
+          path: build/Build/Products/Release/CornellMind-macOS.zip
+          if-no-files-found: error
+          retention-days: 14

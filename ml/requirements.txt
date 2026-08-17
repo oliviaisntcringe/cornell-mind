@@ -1,0 +1,12 @@
+# ML conversion pipeline dependencies
+# (exporters ставится из https://github.com/huggingface/exporters отдельно:
+#  pip install "exporters @ git+https://github.com/huggingface/exporters.git")
+torch>=2.1,<3
+transformers>=4.40,<5
+coremltools>=8
+numpy<2
+sentencepiece
+"tokenizers>=0.22,<=0.23"
+safetensors
+huggingface_hub>=0.23
+protobuf
