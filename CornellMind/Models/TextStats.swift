@@ -17,7 +17,7 @@ struct TextStats {
         for char in text {
             if char.isLetter || char.isNumber {
                 inSentence = true
-            } else if isSentenceEnd(char) && inSentence {
+            } else if Self.isSentenceEnd(char) && inSentence {
                 sentenceCount += 1
                 inSentence = false
             }
@@ -28,7 +28,7 @@ struct TextStats {
         self.duration = duration
     }
 
-    private func isSentenceEnd(_ char: Character) -> Bool {
+    private static func isSentenceEnd(_ char: Character) -> Bool {
         [".", "!", "?", "…", ";"].contains(String(char))
     }
 
