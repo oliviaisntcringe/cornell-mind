@@ -11,6 +11,7 @@
 		248AAA0C0CA83F3496AA4D07 /* AppTokenizers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A84E2F3235F7B783E89F03C /* AppTokenizers.swift */; };
 		2E640661865EA5257851E56D /* MindMapBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D6FB1B407D2087984195EF /* MindMapBuilder.swift */; };
 		32A1501611AC449754EE4409 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D724323BD7F08C69B9B98364 /* ContentView.swift */; };
+		358BABE46E1BB2EE32E237B6 /* QGEncoder.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 9CCEA6D8148C991EF0293DC1 /* QGEncoder.mlpackage */; };
 		38B10CAA9047B84B48A23E73 /* NotesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B10C444D5348BCC2DE930D9 /* NotesListView.swift */; };
 		3FE44C581B0D9FEC7893A58D /* MindMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4F9585DE1884FC17C1E222 /* MindMapView.swift */; };
 		4AC556A54AB7C62B9EF10EA1 /* Embedder in Resources */ = {isa = PBXBuildFile; fileRef = C09FAF7C051B127AEAC413C2 /* Embedder */; };
@@ -18,9 +19,11 @@
 		50746286F8A738958EE68E50 /* CornellMindApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC259B4480BB6E9CACA0134 /* CornellMindApp.swift */; };
 		6244FC05F1A25475FD00C75D /* Flashcard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E5EE8750423B13B4383CFC /* Flashcard.swift */; };
 		6D2E387C4FD9DEE73D75F80D /* QG in Resources */ = {isa = PBXBuildFile; fileRef = 8E487A98A2E417F5F7E126EA /* QG */; };
+		7C485AEFB1FECEB39DCCC5A2 /* Embedder.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = A37A05A90972D58DC1F94384 /* Embedder.mlpackage */; };
 		9D989B9F593A82521F9E8AC3 /* NoteEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67971CE7C6CE7393614C6E1 /* NoteEditorView.swift */; };
 		BA2551DD7B82270F495A4017 /* TextStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379BE328E0C75A43C85145FC /* TextStats.swift */; };
 		E1F908207C67D7EA9D7B9474 /* LectureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2F60212FC4161070A8B9EC /* LectureView.swift */; };
+		E8985B421FE0536A8730F298 /* QGDecoder.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 5D26E5A3161E2A461C532D94 /* QGDecoder.mlpackage */; };
 		F27C4772A6A9FCE667C0399B /* Tokenizers in Frameworks */ = {isa = PBXBuildFile; productRef = 324DC1BD080E5A191EB98F14 /* Tokenizers */; };
 /* End PBXBuildFile section */
 
@@ -29,10 +32,13 @@
 		0C2F60212FC4161070A8B9EC /* LectureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectureView.swift; sourceTree = "<group>"; };
 		379BE328E0C75A43C85145FC /* TextStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStats.swift; sourceTree = "<group>"; };
 		50E5EE8750423B13B4383CFC /* Flashcard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flashcard.swift; sourceTree = "<group>"; };
+		5D26E5A3161E2A461C532D94 /* QGDecoder.mlpackage */ = {isa = PBXFileReference; path = QGDecoder.mlpackage; sourceTree = "<group>"; };
 		6B10C444D5348BCC2DE930D9 /* NotesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesListView.swift; sourceTree = "<group>"; };
 		6F86109D31A79F68490CB263 /* MLService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLService.swift; sourceTree = "<group>"; };
 		7B857433D7F4CB0B65B5C167 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		8E487A98A2E417F5F7E126EA /* QG */ = {isa = PBXFileReference; lastKnownFileType = folder; name = QG; path = CornellMind/Resources/Tokenizer/QG; sourceTree = SOURCE_ROOT; };
+		9CCEA6D8148C991EF0293DC1 /* QGEncoder.mlpackage */ = {isa = PBXFileReference; path = QGEncoder.mlpackage; sourceTree = "<group>"; };
+		A37A05A90972D58DC1F94384 /* Embedder.mlpackage */ = {isa = PBXFileReference; path = Embedder.mlpackage; sourceTree = "<group>"; };
 		BA4F9585DE1884FC17C1E222 /* MindMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MindMapView.swift; sourceTree = "<group>"; };
 		C09FAF7C051B127AEAC413C2 /* Embedder */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Embedder; path = CornellMind/Resources/Tokenizer/Embedder; sourceTree = SOURCE_ROOT; };
 		D499C4C40BBD56523F2B1D71 /* CornellMind.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CornellMind.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,9 +60,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0274663A2279D2D36989884F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A37A05A90972D58DC1F94384 /* Embedder.mlpackage */,
+				5D26E5A3161E2A461C532D94 /* QGDecoder.mlpackage */,
+				9CCEA6D8148C991EF0293DC1 /* QGEncoder.mlpackage */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		12353E3A22B60E8BCB9DC46A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0274663A2279D2D36989884F /* Models */,
 				2CE706262AD80824A0D4E362 /* Tokenizer */,
 			);
 			path = Resources;
@@ -218,6 +235,7 @@
 				248AAA0C0CA83F3496AA4D07 /* AppTokenizers.swift in Sources */,
 				32A1501611AC449754EE4409 /* ContentView.swift in Sources */,
 				50746286F8A738958EE68E50 /* CornellMindApp.swift in Sources */,
+				7C485AEFB1FECEB39DCCC5A2 /* Embedder.mlpackage in Sources */,
 				6244FC05F1A25475FD00C75D /* Flashcard.swift in Sources */,
 				E1F908207C67D7EA9D7B9474 /* LectureView.swift in Sources */,
 				4C5539345075DB43B915153A /* MLService.swift in Sources */,
@@ -226,6 +244,8 @@
 				0BD97C1E07951BB14EC5A9A2 /* Note.swift in Sources */,
 				9D989B9F593A82521F9E8AC3 /* NoteEditorView.swift in Sources */,
 				38B10CAA9047B84B48A23E73 /* NotesListView.swift in Sources */,
+				E8985B421FE0536A8730F298 /* QGDecoder.mlpackage in Sources */,
+				358BABE46E1BB2EE32E237B6 /* QGEncoder.mlpackage in Sources */,
 				BA2551DD7B82270F495A4017 /* TextStats.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -28,8 +28,11 @@ targets:
         type: folder
       - path: CornellMind/Resources/Tokenizer/Embedder
         type: folder
+      - path: CornellMind/Resources/Models/Embedder.mlpackage
+      - path: CornellMind/Resources/Models/QGEncoder.mlpackage
+      - path: CornellMind/Resources/Models/QGDecoder.mlpackage
     resources:
-      - CornellMind/Resources/Models
+      - CornellMind/Resources/Models/TOKENIZERS.md
     dependencies:
       - package: SwiftTransformers
         product: Tokenizers
