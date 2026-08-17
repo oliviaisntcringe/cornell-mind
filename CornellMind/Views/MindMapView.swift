@@ -115,10 +115,10 @@ struct RadialLayout {
         let children = root.children
         if !children.isEmpty {
             for (index, child) in children.enumerated() {
-                let angle = 2 * .pi * Double(index) / Double(children.count) - .pi / 2
+                let angle = Double.pi * 2 * Double(index) / Double(max(children.count, 1)) - Double.pi / 2
                 let point = CGPoint(
-                    x: center.x + cos(angle) * baseRadius,
-                    y: center.y + sin(angle) * baseRadius
+                    x: center.x + CGFloat(cos(angle)) * baseRadius,
+                    y: center.y + CGFloat(sin(angle)) * baseRadius
                 )
                 positions[child.id] = point
                 edges.append(Edge(parent: root.id, child: child.id))
@@ -126,11 +126,11 @@ struct RadialLayout {
                 let grandchildren = child.children.count > 8 ? Array(child.children.prefix(8)) : child.children
                 for (gIndex, grandchild) in grandchildren.enumerated() {
                     let spiral = 1.35 + Double(gIndex) * 0.22
-                    let gRadius = baseRadius * spiral
+                    let gRadius = baseRadius * CGFloat(spiral)
                     let gAngle = angle + Double(gIndex) * 0.5
                     let gPoint = CGPoint(
-                        x: center.x + cos(gAngle) * gRadius,
-                        y: center.y + sin((gAngle)) * gRadius
+                        x: center.x + CGFloat(cos(gAngle)) * gRadius,
+                        y: center.y + CGFloat(sin(gAngle)) * gRadius
                     )
                     positions[grandchild.id] = gPoint
                     edges.append(Edge(parent: child.id, child: grandchild.id))
